@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, :only => [:edit, :update, :destroy, :flag_options, :cast_flag]
   before_action :verify_admin, :only => [:edit, :update, :destroy]
   before_action :verify_bot_authorized, :only => [:create]
-  before_action :check_can_flag, :only => [:cast_flags, :flag_options]
+  before_action :check_can_flag, :only => [:cast_flag, :flag_options]
   skip_before_action :verify_authenticity_token, :only => [:create]
   
   def create
@@ -76,6 +76,7 @@ class PostsController < ApplicationController
   end
 
   def cast_flag
+    puts "CAST_FLAG CALLED"
     opts = { :option_id => params[:option_id].to_i, :key => AppConfig['se_api_key'], :preview => false,
              :access_token => current_user.stack_user.access_token, :site => 'stackoverflow', :id => params[:question_id].to_i }
 
@@ -83,9 +84,9 @@ class PostsController < ApplicationController
       opts[:comment] = params[:comment]
     end
 
-    response = HTTParty.post("https://api.stackexchange.com/2.2/questions/#{params[:answer_id]}/flags/add", :body => opts)
+    response = HTTParty.post("https://api.stackexchange.com/2.2/questions/#{params[:question_id]}/flags/add", :body => opts)
     if response.code == 200
-      flag = Flag.new(:post => Post.find_by_answer_id(params[:answer_id]), :user => current_user, :flag_type => params[:flag_type])
+      flag = Flag.new(:post => Post.find_by_question_id(params[:question_id]), :user => current_user, :flag_type => params[:flag_type])
       unless flag.save
         render :json => {:error_message => flag.errors.full_messages.map{ |m| m.downcase! }.to_sentence.capitalize }, :status => 500
       end
