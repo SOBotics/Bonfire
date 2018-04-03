@@ -76,7 +76,6 @@ class PostsController < ApplicationController
   end
 
   def cast_flag
-    puts "CAST_FLAG CALLED"
     opts = { :option_id => params[:option_id].to_i, :key => AppConfig['se_api_key'], :preview => false,
              :access_token => current_user.stack_user.access_token, :site => 'stackoverflow', :id => params[:question_id].to_i }
 
