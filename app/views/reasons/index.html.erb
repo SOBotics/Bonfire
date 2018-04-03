@@ -1,0 +1,6 @@
+<h3>Reasons</h3>
+<p>Reasons enable posts to be caught. Most frequent show up first.</p>
+
+<% @reasons.each do |reason| %>
+  <%= render 'reasons/reason', :reason => reason %>
+<% end %>

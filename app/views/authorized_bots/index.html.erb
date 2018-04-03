@@ -1,0 +1,26 @@
+<h3>Authorized Bots</h3>
+<p>This lists all the keys registered for bot-write access to various Bonfire resources. Keys can be revoked at any time by owners or admininstrators.</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Key</th>
+      <th>Registered</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bots.each do |bot| %>
+      <tr>
+        <td><%= bot.name %></td>
+        <td><%= bot.key %></td>
+        <td><%= time_ago_in_words(bot.created_at) %> ago</td>
+        <td><%= link_to "Revoke", url_for(:controller => :authorized_bots, :action => :destroy, :id => bot.id), :class => "text-danger",
+                                  :method => :delete, :data => { :confirm => "Revoke write access for #{bot.name}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Create a new key", url_for(:controller => :authorized_bots, :action => :new) %>

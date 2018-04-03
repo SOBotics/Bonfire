@@ -1,0 +1,20 @@
+<h3>Reported Posts</h3>
+
+<%= line_chart url_for(:controller => :graphs, :action => :posts_by_hour) %>
+
+<p>Ordered by <%= params[:sort] || 'created_at desc' %></p>
+
+<%= form_tag url_for(:controller => :posts, :action => :index), :method => :get do %>
+  <%= label_tag 'sort', 'Sort by' %>
+  <%= select_tag 'sort', options_for_select([['Likelihood', 'likelihood desc'], ['Creation date', 'created_at desc'],
+                                              ['User reputation', 'user_reputation desc']], params[:sort] || 'created_at desc') %>
+  <%= submit_tag "Go", :class => "bt btn-default" %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <%= render 'posts/post', :post => post %>
+<% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
+</div>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  body: MyText
+  link: MyString
+  post_creation_date: 2018-03-27 14:04:50
+  user_link: MyString
+  username: MyString
+  user_reputation: 1
+  likelihood: 1
+
+two:
+  title: MyString
+  body: MyText
+  link: MyString
+  post_creation_date: 2018-03-27 14:04:50
+  user_link: MyString
+  username: MyString
+  user_reputation: 1
+  likelihood: 1

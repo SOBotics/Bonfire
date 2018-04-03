@@ -1,0 +1,73 @@
+<h3>
+  <%= link_to @post.title, @post.link %>
+</h3>
+
+<p><strong>Likelihood: </strong><%= @post.likelihood %></p>
+<pre><code><%= @post.body %></code></pre>
+<div class="post-details clearfix">
+  <div class="meta-details pull-left text-left">
+    Posted <%= time_ago_in_words(@post.post_creation_date) %> ago |
+    Reported <%= time_ago_in_words(@post.created_at) %> ago
+  </div>
+  <div class="user-details pull-right text-right">
+    Posted by <%= link_to @post.username, @post.user_link %> (<%= @post.user_reputation %>)
+  </div>
+</div>
+
+<br/>
+
+<% if user_signed_in? %>
+  <% if current_user.stack_user.present? %>
+    <p>
+      <a href="#" class="text-danger post-flag-link" data-questionid="<%= @post.question_id %>"><span class="glyphicon glyphicon-flag"></span> Flag this post</a>
+    </p>
+  <% else %>
+    <p class="text-muted">
+      <span class="glyphicon glyphicon-flag"></span> <%= link_to "Authenticate with Stack Exchange", url_for(:controller => :se_auth, :action => :initiate) %>
+      to flag this post.
+    </p>
+  <% end %>
+  <br/>
+<% end %>
+
+<p><strong>Caught by <%= pluralize(@post.reasons.count, "reason") %>:</strong></p>
+<ul class="post-reasons">
+  <% @post.reasons.each do |reason| %>
+    <li><%= link_to reason.name, url_for(:controller => :reasons, :action => :show, :id => reason.id) %></li>
+  <% end %>
+</ul>
+
+<br/>
+
+<% if user_signed_in? && current_user.has_role?(:admin) %>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Admin tools</h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li><%= link_to "Edit", url_for(:controller => :posts, :action => :edit, :id => @post.id) %></li>
+        <li><%= link_to "Delete", url_for(:controller => :posts, :action => :destroy, :id => @post.id), :method => :delete,
+                :class => "text-danger", :data => { :confirm => "Are you sure? This can't be undone." } %></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<div class="modal fade">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">I am flagging to report this answer as...</h4>
+      </div>
+      <div class="modal-body flag-dialog">
+        <div class="clearfix">
+          <div class="pull-right text-right">
+            <button class="btn btn-danger cast-flag" data-questionid="<%= @post.question_id %>">Flag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
