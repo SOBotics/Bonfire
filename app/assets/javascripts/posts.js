@@ -45,8 +45,23 @@ $(document).ready(function() {
         .done(function(data) {
             var items = data['items'];
             var dialog = $(".modal-body").first();
-            initialiseFlagDialog(items, dialog, false)
-            $(".modal").first().modal('show');
+            var closeVoteItems = null             
+
+            for (var i = 0; i < items.length; i ++) {
+                // Pretty hacky and messy, but this *shouldn't* change with time and there is no better option.
+                if (items[i]['title'] == 'should be closed...') {
+                    if ('sub_options' in items[i]) {
+                        closeVoteItems = items[i]['sub_options']
+                    }
+                }
+            }
+ 
+            if (closeVoteItems != null) {
+                initialiseFlagDialog(closeVoteItems, dialog, false)
+                $(".modal").first().modal('show');
+            } else {
+                bonfire.createNotification('danger', "No close options available; have you already cast a close vote, or have retracted your vote?", $(".post-flag-link"));
+            }
         })
         .error(function(xhr, status, error) {
             bonfire.createNotification('danger', JSON.parse(xhr.responseText)['error_message'], $(".post-flag-link"));
