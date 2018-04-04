@@ -12,6 +12,28 @@ function createFlagOption(item, handler) {
     return container;
 }
 
+function initialiseFlagDialog(items, dialog, empty=true) {
+    if (empty == true) {
+        $(".modal-body").empty();
+    }
+
+    for (var i = 0; i < items.length; i ++) {
+        if(!items[i]['has_flagged']) {
+            var flagOption = createFlagOption(items[i], function(item) {
+                return function(ev) {
+                    if (item['requires_comment']) {
+                        window.flagComment = prompt("Please enter a comment to be sent with this flag: ", "");
+                    }
+                    if ('sub_options' in item) {
+                        initialiseFlagDialog(item['sub_options'], dialog);
+                    }
+                }
+            });
+            flagOption.prependTo(dialog);
+        }
+    }
+}
+
 $(document).ready(function() {
     $(".post-flag-link").on("click", function(ev) {
         ev.preventDefault();
@@ -23,18 +45,7 @@ $(document).ready(function() {
         .done(function(data) {
             var items = data['items'];
             var dialog = $(".modal-body").first();
-            for (var i = 0; i < items.length; i++) {
-                if (!items[i]['has_flagged']) {
-                    var flagOption = createFlagOption(items[i], function(item) {
-                        return function(ev) {
-                            if (item['requires_comment']) {
-                                window.flagComment = prompt("Please enter a comment to be sent with this flag:", "");
-                            }
-                        }
-                    });
-                    flagOption.prependTo(dialog);
-                }
-            }
+            initialiseFlagDialog(items, dialog, false)
             $(".modal").first().modal('show');
         })
         .error(function(xhr, status, error) {
