@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   has_and_belongs_to_many :reasons
-  has_many :deletion_logs, dependent: :destroy
+  has_one :post_log
   has_many :flags, dependent: :destroy
   belongs_to :site
 
@@ -13,7 +13,7 @@ class Post < ApplicationRecord
   validates :user_reputation, :presence => true
   validates :likelihood, :presence => true
   validate :question_id_exists
- 
+
   private
     def question_id_exists
       unless self.question_id.present?

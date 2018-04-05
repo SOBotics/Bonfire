@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329090624) do
+ActiveRecord::Schema.define(version: 20180405043305) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20180329090624) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "close_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "post_id"
+    t.boolean "is_closed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_close_logs_on_post_id"
+  end
+
   create_table "deletion_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "post_id"
     t.boolean "is_deleted"
@@ -45,6 +53,19 @@ ActiveRecord::Schema.define(version: 20180329090624) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_flags_on_post_id"
     t.index ["user_id"], name: "index_flags_on_user_id"
+  end
+
+  create_table "post_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "post_id"
+    t.boolean "is_deleted"
+    t.boolean "is_closed"
+    t.datetime "deletion_date"
+    t.datetime "close_date"
+    t.string "close_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "close_vote_count"
+    t.index ["post_id"], name: "index_post_logs_on_post_id"
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -135,4 +156,6 @@ ActiveRecord::Schema.define(version: 20180329090624) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "close_logs", "posts"
+  add_foreign_key "post_logs", "posts"
 end

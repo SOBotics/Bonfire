@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  post: one
+  is_deleted: false
+  is_closed: false
+  deletion_date: 2018-04-05 08:37:00
+  close_date: 2018-04-05 08:37:00
+  close_reason: MyString
+
+two:
+  post: two
+  is_deleted: false
+  is_closed: false
+  deletion_date: 2018-04-05 08:37:00
+  close_date: 2018-04-05 08:37:00
+  close_reason: MyString
