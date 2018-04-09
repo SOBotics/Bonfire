@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405043305) do
+ActiveRecord::Schema.define(version: 20180408094620) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20180405043305) do
 
   create_table "post_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "post_id"
-    t.boolean "is_deleted"
-    t.boolean "is_closed"
+    t.boolean "is_deleted", default: false
+    t.boolean "is_closed", default: false
     t.datetime "deletion_date"
     t.datetime "close_date"
     t.string "close_reason"

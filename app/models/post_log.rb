@@ -1,16 +1,17 @@
 class PostLog < ApplicationRecord
   belongs_to :post
 
-  validates :is_deleted, :presence => true
-  #validates :is_closed, :presence => true
+  validates :is_deleted, :inclusion => [true, false]
+  validates :is_closed, :inclusion => [true, false]
+  validates :close_vote_count, :inclusion => 0..5
 
   def self.get_statuses
     api_key = AppConfig['se_api_key']
     api_filter = '!)R7_YDvFk_s2DCKPUucfUyln'
-    posts = Post.left_joins(:post_log)
+    eligible = Post.left_joins(:post_log)
 
-    eligible = posts.where(:post_log.nil?)
-                #.or(posts.where(:post_log => {:is_deleted => false}))
+    eligible = eligible.where(:post_log.nil?)
+                .or(eligible.where("post_log.is_deleted = ?", false))
 
     eligible = eligible.where('posts.created_at > ?', 4.weeks.ago)
     logger.debug "[PostLog#get_statuses] Count #{eligible.count} posts for PostLog checking."
@@ -35,14 +36,10 @@ class PostLog < ApplicationRecord
           if post.post_log.present?
             log = post.post_log
             unless log.is_deleted
-              log.is_deleted = true
-              log.deletion_date = current_date
-              unless log.save
-                logger.error "[PostLog#get_statuses] Unable to save post log for post id: #{post.question_id}"
-              end
+              log.update(:is_deleted => true, :deletion_date => current_date)
             end
           else
-            PostLog.create(:post => post, :is_closed => false, :close_vote_count => 0, :is_deleted => true, :deletion_date => current_date)
+            PostLog.create(:post => post, :is_deleted => true, :deletion_date => current_date, :close_vote_count => 0)
           end
         end
 
@@ -55,18 +52,16 @@ class PostLog < ApplicationRecord
             closed_date = Time.at(item['closed_date']).to_datetime
             if post.post_log.present?
               log = post.post_log
-              log.close_vote_count = 0
-              log.is_closed = true
-              log.close_reason = item['closed_reason']
-              log.close_date = closed_date
-              unless log.save
-                logger.error "[PostLog#get_statuses] Unable to save post log for post id: #{post.question_id}"
+              unless log.is_closed
+                log.update(:is_closed => true, :close_vote_count => 0, :close_reason => item['closed_reason'], :close_date => closed_date)
               end
             else
-              PostLog.create(:post => post, :is_deleted => false, :is_closed => true, :close_vote_count => 0, :close_reason => item['closed_reason'], :close_date => closed_date)
+              PostLog.create(:post => post, :is_closed => true, :close_vote_count => 0, :close_reason => item['closed_reason'], :close_date => closed_date)
             end
           end
-        end 
+        end
+
+        logger.debug "[PostLog#get_statuses] #{total_closed} posts of 100-batch posts have been closed." 
         
         if json['backoff']
           logger.debug "[PostLog#get_statuses] Received API backoff; sleeping for #{json['backoff']} seconds."
