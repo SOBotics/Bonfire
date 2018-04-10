@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408094620) do
+ActiveRecord::Schema.define(version: 20180410040544) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -95,6 +95,24 @@ ActiveRecord::Schema.define(version: 20180408094620) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "review_actions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "short_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "post_id"
+    t.bigint "review_action_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_reviews_on_post_id"
+    t.index ["review_action_id"], name: "index_reviews_on_review_action_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "resource_type"
@@ -158,4 +176,7 @@ ActiveRecord::Schema.define(version: 20180408094620) do
 
   add_foreign_key "close_logs", "posts"
   add_foreign_key "post_logs", "posts"
+  add_foreign_key "reviews", "posts"
+  add_foreign_key "reviews", "review_actions"
+  add_foreign_key "reviews", "users"
 end

@@ -58,6 +58,15 @@ class PostLog < ApplicationRecord
             else
               PostLog.create(:post => post, :is_closed => true, :close_vote_count => 0, :close_reason => item['closed_reason'], :close_date => closed_date)
             end
+          elsif item.key?("close_vote_count")
+            if post.post_log.present?
+              log = post.post_log
+              unless log.is_closed || log.close_vote_count == item['close_vote_count']
+                log.update(:is_closed => false, :close_vote_count => item['close_vote_count'])
+              end
+            else
+              PostLog.create(:post => post, :is_closed => false, :close_vote_count => item['close_vote_count'])
+            end
           end
         end
 

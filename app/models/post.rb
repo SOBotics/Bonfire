@@ -14,6 +14,10 @@ class Post < ApplicationRecord
   validates :likelihood, :presence => true
   validate :question_id_exists
 
+  def next
+    Post.where("id > ?", self.id).first
+  end
+
   private
     def question_id_exists
       unless self.question_id.present?

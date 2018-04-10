@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+review_actions = [
+  {
+    name: 'Close',
+    short_name: 'vtc'
+  },
+  {
+    name: 'Skip',
+    short_name: 'skp'
+  }
+]
+
+ReviewAction.create(review_actions)

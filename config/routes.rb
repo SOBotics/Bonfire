@@ -47,4 +47,10 @@ Rails.application.routes.draw do
   get 'search', :to => 'search#results'
 
   get 'graphs/posts_by_hour', :to => 'graphs#posts_by_hour'
+
+  get 'review/close_review', :to => 'review#close_review'
+  get 'review/:post_id', :to => 'review#show'
+  get 'review/:prev_id/next', :to => 'review#next'
+  get 'review/seed_review', :to => 'review#seed_review'
+  post 'review/create', :to => 'review#create'
 end
