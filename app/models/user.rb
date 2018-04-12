@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :stack_user
+  has_many :reviews
 
   after_save :promote_if_first
 

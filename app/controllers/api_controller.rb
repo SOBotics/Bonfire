@@ -17,7 +17,7 @@ class ApiController < ApplicationController
     render :reasons_by_id, :formats => :json
   end  
 
-  def has_more
+  def has_more(result_count, per_page, page)
     result_count > (page || 1).to_i * per_page
   end
 

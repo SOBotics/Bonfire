@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :reasons
   has_one :post_log, dependent: :destroy
   has_many :flags, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   belongs_to :site
 
   validates :title, :presence => true
