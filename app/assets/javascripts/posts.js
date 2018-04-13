@@ -1,3 +1,5 @@
+var currentQuestionID;
+
 function createFlagOption(item, handler) {
     var container = $("<div></div>");
     container.addClass("clearfix flag-option");
@@ -38,6 +40,7 @@ $(document).ready(function() {
     $(".post-flag-link").on("click", function(ev) {
         ev.preventDefault();
         var questionId = $(this).data("questionid");
+        currentQuestionID = questionId;
         $.ajax({
             'type': 'GET',
             'url': '/posts/' + questionId + '/flag_options'
@@ -72,7 +75,7 @@ $(document).ready(function() {
         var checkedOption = $("input[name=flag-option]:checked");
         var selected = checkedOption.val();
         var comment = window.flagComment || null;
-        var questionId = $(this).data("questionid");
+        var questionId = currentQuestionID;
         var flagType = checkedOption.data("flagtype");
         $.ajax({
             'type': 'POST',
