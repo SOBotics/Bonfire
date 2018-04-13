@@ -1,1 +1,8 @@
 <h3> Review </h3>
+
+<hr>
+<h4><%= link_to "Close Review", url_for(:controller => :review, :action => :close_review) %></h4>
+Use this to burn your daily close vote quota. Consists of reports with one or more close votes.
+<hr>
+<h4><%= link_to "Seed Review", url_for(:controller => :review, :action => :seed_review) %></h4>
+Use this queue when the amount of questions in the close queue is minimal. Consists of reports with no close votes, and has a higher number of false positives.

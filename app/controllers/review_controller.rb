@@ -24,14 +24,17 @@ class ReviewController < ApplicationController
   end
 
   def seed_review
-    @posts = Post.where('created_at > ? AND (post_log = ? OR (post_log.is_closed = ? AND post_log.is_deleted = ?))', 14.days.ago, nil, false, false)
+    @posts = Post.where('posts.created_at > ?', 9.days.ago)
+    @posts = @posts.left_joins(:post_log).where('close_vote_count = ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
+    @posts = @posts.left_joins(:reviews).where(:reviews => {:id => nil})
+              .or(@posts.left_joins(:reviews).where.not(:reviews => {:user_id => current_user.id}))
+    @posts = @posts.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 75) 
   end
 
   def close_review
     @posts = Post.left_joins(:post_log).where('close_vote_count > ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
     @posts = @posts.left_joins(:reviews).where(:reviews => {:id => nil})
               .or(@posts.left_joins(:reviews).where.not(:reviews => {:user_id => current_user.id}))
-    @posts.limit(100)
   end
 
   private
