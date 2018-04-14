@@ -1,6 +1,6 @@
 <h3>Reported Posts</h3>
 
-<%= line_chart url_for(:controller => :graphs, :action => :posts_by_hour) %>
+<%= line_chart url_for(:controller => :graphs, :action => :posts_by_hour), :library => {:colors => ["orange"]} %>
 
 <p>Ordered by <%= params[:sort] || 'created_at desc' %></p>
 
