@@ -1,3 +1,6 @@
+var currentPostID;
+var $currentPost;
+
 $(document).ready(function() {
     $(".skip-link").on("click", function(ev) {
         var review_action_name = $(this).data("raction");
@@ -21,11 +24,14 @@ $(document).ready(function() {
         });
     })
 
+    $(".post-flag-link").on("click", function(ev) {
+        $currentPost = $(this).parent().parent();
+        currentPostID = $currentPost.data("post-id");
+    })
+
     $(".cast-flag").on("click", function(ev) {
         var review_action_name = $(this).data("raction");
-        // Yeah, I know what you're thinking...
-        var $post = $(this).parent().parent().parent().parent().parent().parent().parent().parent();
-        var postId = $post.data("post-id");
+        var postId = currentPostID;
         $.ajax({
             'type': 'POST',
             'url': '/review/create',
@@ -35,7 +41,7 @@ $(document).ready(function() {
             }
         })
         .done(function(data) {
-            $post.fadeOut(200, function() {
+            $currentPost.fadeOut(200, function() {
                 $(this).remove();
             });
             $(".modal").modal('hide');

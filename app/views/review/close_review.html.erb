@@ -33,25 +33,6 @@
     <%= render 'posts/post', :post => post %>
     <blockquote style="font-size: 14px"><%== post.body %></blockquote>
   </div>
-  <div class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">I am close voting this question as...</h4>
-        </div>
-        <div class="modal-body flag-dialog">
-        </div>
-        <div class="modal-footer">
-          <div class="clearfix">
-            <div class="pull-right text-right">
-              <button class="btn btn-danger cast-flag" data-questionid="<%= post.question_id %>" data-raction="vtc">Vote to Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 <% end %>
 
 <div class="text-center">
