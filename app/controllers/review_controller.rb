@@ -1,6 +1,8 @@
 class ReviewController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_stack_auth
+  helper_method :seed_count
+  helper_method :close_count
 
   def index
   end
@@ -21,6 +23,16 @@ class ReviewController < ApplicationController
       messages = @review.errors.full_messages
       render :json => {:status => "E:REVIEW_FAILED_TO_SAVE", :code => "500", :messages => messages}, :status => 500
     end
+  end
+
+  def seed_count
+    posts = get_seed_posts
+    return posts.count
+  end
+
+  def close_count
+    posts = get_close_posts
+    return posts.count
   end
 
   def seed_review
