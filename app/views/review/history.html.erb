@@ -1,0 +1,25 @@
+<h3>Review History</h3>
+<p>This page contains the history of all reviews ever undertaken.</p>
+
+<table class="table table-striped">
+  <thead>
+    <th>Post</th>
+    <th>User</th>
+    <th>Result</th>
+    <th>At</th>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= link_to review.post.title, url_for(:controller => :posts, :action => :show, :id => review.post.id) %></td>
+        <td><%= review.user.username %></td>
+        <td><span class="<%= review.text_class %>"><%= review.review_action.name %></span></td>
+        <td><span class="<%= review.created_at %>"><%= time_ago_in_words review.created_at %> ago</span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= will_paginate @reviews, renderer: BootstrapPagination::Rails %>
+</div>

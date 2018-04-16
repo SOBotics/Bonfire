@@ -1,4 +1,12 @@
-<h3> Review </h3>
+<div class="review-header clearfix">
+  <div class="name pull-left text-left">
+    <h3>Review</h3>
+  </div>
+  <div class="history-link pull-right text-right">
+    <br/>
+    <h5><%= link_to "History", url_for(:controller => :review, :action => :history) %></h5>
+  </div>
+</div>
 
 <hr>
 <h4><%= link_to "Close Review", url_for(:controller => :review, :action => :close_review) %> <span class="badge"><%= close_count %></span></h4>

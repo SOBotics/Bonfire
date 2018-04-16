@@ -45,6 +45,10 @@ class ReviewController < ApplicationController
     @posts = @posts.paginate(:page => params[:page], :per_page => 60)     
   end
 
+  def history
+    @reviews = Review.all.order(:id => :desc).paginate(:page => params[:page], :per_page => 100)
+  end 
+
   private
     def verify_stack_auth
       unless current_user.stack_user.present?
