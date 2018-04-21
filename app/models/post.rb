@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
   validates :title, :presence => true
   validates :body, :presence => true
-  validates :link, :presence => true, :uniqueness => true
+  validates :link, :presence => true
   validates :post_creation_date, :presence => true
   validates :user_link, :presence => true
   validates :username, :presence => true
