@@ -3,7 +3,9 @@ class Site < ApplicationRecord
 
   def self.update_site_list
     require 'net/http'
-    url = url = URI.parse('https://api.stackexchange.com/2.2/sites?pagesize=1000&filter=!*L1-85AFULD6pPxF')
+    
+    url_string = "https://api.stackexchange.com/2.2/sites?pagesize=1000&filter=!*L1-85AFULD6pPxF&key=#{AppConfig["se_api_key"]}"
+    url = url = URI.parse(url_string)
     res = Net::HTTP.get_response(url)
     sites = JSON.parse(res.body)["items"]
     if sites.count > 100 # Sites count should be at least 100; else, something is wrong.
