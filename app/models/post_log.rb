@@ -13,7 +13,7 @@ class PostLog < ApplicationRecord
     eligible = eligible.where(:post_log.nil?)
                 .or(eligible.where("post_log.is_deleted = ?", false))
 
-    eligible = eligible.where('posts.created_at > ?', 2.weeks.ago).or(eligible.left_joins(:post_log).where("post_log.close_vote_count > ?", 0))
+    eligible = eligible.where('posts.created_at > ?', 2.weeks.ago).or(eligible.left_joins(:post_log).where("close_vote_count > ?", 0))
     logger.debug "[PostLog#get_statuses] Count #{eligible.count} posts for PostLog checking."
 
     eligible.in_groups_of(100, false).each do |group|
