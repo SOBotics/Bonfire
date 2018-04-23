@@ -1,6 +1,5 @@
 1. Bonfire Logo (BR)
 2. Sync with Git.
-3. Fix oAuth on server.
 5. Update SA post.
 6. Update README.
 7. Channels post?

@@ -16,7 +16,7 @@ class User < ApplicationRecord
       :client_id => AppConfig['se_client_id'],
       :client_secret => AppConfig['se_client_secret'],
       :code => code,
-      :redirect_uri => Rails.application.routes.url_helpers.url_for(:host => host, :controller => :se_auth, :action => :target)
+      :redirect_uri => Rails.application.routes.url_helpers.url_for(:host => host, :protocol => "https", :controller => :se_auth, :action => :target)
     }
 
     response = HTTParty.post("https://stackexchange.com/oauth/access_token", :body => parameters)
