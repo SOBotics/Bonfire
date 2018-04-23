@@ -1,0 +1,10 @@
+1. Bonfire Logo (BR)
+2. Sync with Git.
+3. Fix oAuth on server.
+4. PostLog column problems.
+5. Update SA post.
+6. Update README.
+7. Channels post?
+8. Update whenever cron job to include PATH instead of messy manual overwrite using `crontab -e`.
+9. Checkout FA's backslash issue.
+10.
