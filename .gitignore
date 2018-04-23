@@ -56,3 +56,6 @@ config/config.yml
 
 # Ignore Python tests I usually write.
 *.py
+
+# Ignore DS_Store on mac devices.
+*.DS_Store
