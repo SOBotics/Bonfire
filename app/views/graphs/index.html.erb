@@ -1,3 +1,16 @@
+<h2>Statistics</h2>
+
+<strong>Likelihood</strong> <small><i>Higher</i> likelihoods report more posts and are less accurate. This setting returns posts less than or equal to the specified likelihood</small>
+
+<%= form_tag url_for(:controller => :graphs, :action => :index), :method => :get do %>
+  <div class="field input-group">
+    <%= number_field_tag "likelihood", params[:likelihood] || 60, min: -2, max: 60, :step => '1', :class => "form-control" %>
+    <span class="input-group-btn">
+      <%= submit_tag 'Set', :class => "btn btn-success" %>
+    </span>
+  </div>
+<% end %>
+
 <h3>Post Statuses <small>All time</small></h3>
 
-<%= pie_chart url_for(:controller => :graphs, :action => :post_statuses), colors: ['red', 'orange', 'green'] %>
+<%= pie_chart url_for(:controller => :graphs, :action => :post_statuses, :likelihood => params[:likelihood] || 60), colors: ['red', 'orange', 'green'] %>

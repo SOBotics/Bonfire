@@ -22,19 +22,21 @@ class GraphsController < ApplicationController
   end
 
   def post_statuses
+    likelihood = params[:likelihood].to_i
     data = cached_query :post_statuses_graph do 
       [
         [
           'Closed',
-          PostLog.where(is_closed: true).count
+          ((PostLog.where(is_closed: true)).left_joins(:post).where('likelihood <= ?', likelihood)).count
         ],
         [
           'Deleted',
-          PostLog.where(is_deleted: true).count
+          ((PostLog.where(is_deleted: true)).left_joins(:post).where('likelihood <= ?', likelihood)).count
         ],
         [
           'Other',
-          PostLog.where('is_closed = false AND is_deleted = false').count
+          ((PostLog.where('is_closed = false AND is_deleted = false')).left_joins(:post).where('likelihood <= ?', likelihood)).count
+
         ]
       ]
     end

@@ -9,4 +9,5 @@
 16. Add stats to review queues; top reviewers, total reviewed, etc.
 17. Fix OT close dialog.
 20. Make user data public.
-21
+21. Grey out the selected tab.
+22.
