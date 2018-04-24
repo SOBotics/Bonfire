@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   post 'users/:id/promote', :to => 'users#promote'
   post 'users/:id/demote', :to => 'users#demote'
   get 'users/:id', :to => 'users#show'
-  get 'users/edit', :to => 'users#edit'
   post 'users/:user_id/deauth', :to => 'se_auth#deauth'
 
   get 'authentication/initiate', :to => 'se_auth#initiate'
