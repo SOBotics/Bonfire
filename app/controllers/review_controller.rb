@@ -61,6 +61,7 @@ class ReviewController < ApplicationController
       eligible = Post.where('posts.created_at > ?', 9.days.ago)
       eligible = eligible.left_joins(:post_log).where('close_vote_count = ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
       eligible = eligible.left_joins(:reviews).where('reviews.id IS NULL OR reviews.user_id != ?', current_user.id)
+      eligible = remove_reviewed(eligible)
       return eligible
     end
 
