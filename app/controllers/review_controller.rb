@@ -60,17 +60,13 @@ class ReviewController < ApplicationController
     def get_seed_posts
       eligible = Post.where('posts.created_at > ?', 9.days.ago)
       eligible = eligible.left_joins(:post_log).where('close_vote_count = ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
-      eligible = eligible.left_joins(:reviews).where(:reviews => {:id => nil})
-                  .or(eligible.left_joins(:reviews).where.not(:reviews => {:user_id => current_user.id}))
-      eligible = remove_reviewed(eligible)
+      eligible = eligible.left_joins(:reviews).where('reviews.id IS NULL OR reviews.user_id != ?', current_user.id)
       return eligible
     end
 
     def get_close_posts
       eligible = Post.left_joins(:post_log).where('close_vote_count > ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
-      eligible = eligible.left_joins(:reviews).where(:reviews => {:id => nil})
-                  .or(eligible.left_joins(:reviews).where.not(:reviews => {:user_id => current_user.id}))
-      eligible = remove_reviewed(eligible)
+      eligible = eligible.left_joins(:reviews).where('reviews.id IS NULL OR reviews.user_id != ?', current_user.id)
       return eligible
     end
 
