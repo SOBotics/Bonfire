@@ -9,7 +9,5 @@
 14. Allow review queues to be accessed without auth.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
 17. Fix OT close dialog.
-18. Sort close options in the standard way in the close dialog.
-19. Add accounts settings.
 20. Make user data public.
 21
