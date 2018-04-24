@@ -67,6 +67,7 @@ class ReviewController < ApplicationController
     def get_close_posts
       eligible = Post.left_joins(:post_log).where('close_vote_count > ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
       eligible = eligible.left_joins(:reviews).where('reviews.id IS NULL OR reviews.user_id != ?', current_user.id)
+      eligible = remove_reviewed(eligible)
       return eligible
     end
 
@@ -76,7 +77,7 @@ class ReviewController < ApplicationController
       posts.each do |post|
         post.reviews.each do |review|
           if review.user_id == current_user.id
-            filtered_posts -= [post]
+            filtered_posts = filtered_posts.where.not(:id => post.id)
             break
           end
         end
