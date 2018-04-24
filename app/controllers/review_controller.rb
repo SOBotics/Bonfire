@@ -80,7 +80,7 @@ class ReviewController < ApplicationController
       posts.each do |post|
         post.reviews.each do |review|
           if review.user_id == current_user.id
-            filtered_posts -= post
+            filtered_posts -= [post]
             break
           end
         end
