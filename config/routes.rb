@@ -44,7 +44,9 @@ Rails.application.routes.draw do
 
   get 'search', :to => 'search#results'
 
+  get 'graphs', :to => 'graphs#index'
   get 'graphs/posts_by_hour', :to => 'graphs#posts_by_hour'
+  get 'graphs/post_statuses', :to => 'graphs#post_statuses'
 
   get 'review', :to => 'review#index'
   get 'review/close', :to => 'review#close_review'

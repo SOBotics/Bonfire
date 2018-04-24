@@ -40,6 +40,7 @@
         <li><%= link_to review_path do %>
           review <span class="badge"><%= Post.left_joins(:post_log).where('close_vote_count > ? AND is_deleted = ? AND is_closed = ?', 0, false, false).count %></span>
         <% end %></li>
+        <li><%= link_to "graphs", graphs_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
