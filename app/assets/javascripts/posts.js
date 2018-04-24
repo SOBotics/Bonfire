@@ -5,7 +5,10 @@ function createFlagOption(item, handler) {
     container.addClass("clearfix flag-option");
     container.append("<div class='pull-left col-sm-1 col-md-1'><input type='radio' name='flag-option' value='" + item['option_id'] + "' data-flagtype='" + item['title'] + "'/></div>");
     var details = $("<div class='pull-right col-sm-11 col-md-11'></div>");
-    details.append("<p><strong>" + item['title'] + "</strong></p>");
+    
+    if('title' in item) {
+        details.append("<p><strong>" + item['title'] + "</strong></p>");
+    }
     details.append("<p>" +  item['description'] + "</p>");
     container.append(details);
 
