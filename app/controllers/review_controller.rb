@@ -62,6 +62,7 @@ class ReviewController < ApplicationController
       eligible = eligible.left_joins(:post_log).where('close_vote_count = ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
       eligible = eligible.left_joins(:reviews).where(:reviews => {:id => nil})
                   .or(eligible.left_joins(:reviews).where.not(:reviews => {:user_id => current_user.id}))
+      eligible = remove_reviewed(eligible)
       return eligible
     end
 
@@ -69,6 +70,21 @@ class ReviewController < ApplicationController
       eligible = Post.left_joins(:post_log).where('close_vote_count > ? AND is_deleted = ? AND is_closed = ?', 0, false, false)
       eligible = eligible.left_joins(:reviews).where(:reviews => {:id => nil})
                   .or(eligible.left_joins(:reviews).where.not(:reviews => {:user_id => current_user.id}))
+      eligible = remove_reviewed(eligible)
       return eligible
+    end
+
+    # there should be an easier way to do this
+    def remove_reviewed(posts)
+      filtered_posts = posts
+      posts.each do |post|
+        post.reviews.each do |review|
+          if review.user_id == current_user.id
+            filtered_posts -= post
+            break
+          end
+        end
+      end
+      return filtered_posts
     end
 end

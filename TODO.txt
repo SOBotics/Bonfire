@@ -1,8 +1,13 @@
-2. Sync with Git.
 5. Update SA post.
 6. Update README.
 7. Channels post?
 8. Update whenever cron job to include PATH instead of messy manual overwrite using `crontab -e`.
 9. Checkout FA's backslash issue.
 10. Ruby Enterprise Edition
-11.
+11. Change version 'test'.
+12. Add statistics
+13. Allow login without email/password.
+14. Allow review queues to be accessed without auth.
+15. Posts already reviewed are appearing again in the queue.
+16. Add stats to review queues; top reviewers, total reviewed, etc.
+17. 
