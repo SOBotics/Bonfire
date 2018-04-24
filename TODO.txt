@@ -1,4 +1,3 @@
-5. Update SA post.
 6. Update README.
 7. Channels post?
 8. Update whenever cron job to include PATH instead of messy manual overwrite using `crontab -e`.
@@ -9,4 +8,8 @@
 13. Allow login without email/password.
 14. Allow review queues to be accessed without auth.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
-17. 
+17. Fix OT close dialog.
+18. Sort close options in the standard way in the close dialog.
+19. Add accounts settings.
+20. Make user data public.
+21

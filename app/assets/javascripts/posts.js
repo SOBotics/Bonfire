@@ -31,7 +31,7 @@ function initialiseFlagDialog(items, dialog, empty=true) {
                     }
                 }
             });
-            flagOption.prependTo(dialog);
+            flagOption.appendTo(dialog);
         }
     }
 }
