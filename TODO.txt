@@ -7,7 +7,6 @@
 13. Allow login without email/password.
 14. Allow review queues to be accessed without auth.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
-17. Fix OT close dialog.
-20. Make user data public.
 21. Grey out the selected tab.
-22.
+22. Allow users to access the Graphs page only if signed in.
+23.
