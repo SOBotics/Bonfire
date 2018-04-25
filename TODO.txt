@@ -8,5 +8,4 @@
 14. Allow review queues to be accessed without auth.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
 21. Grey out the selected tab.
-22. Allow users to access the Graphs page only if signed in.
 23.
