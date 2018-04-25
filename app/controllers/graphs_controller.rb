@@ -1,5 +1,5 @@
 class GraphsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :except => [:posts_by_hour]
 
   def index
   end
