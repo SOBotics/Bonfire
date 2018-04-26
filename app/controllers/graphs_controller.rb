@@ -23,6 +23,28 @@ class GraphsController < ApplicationController
     render json: Post.where('created_at > ?', 1.week.ago).group_by_hour(:created_at).count
   end
 
+  def reason_post_status_types
+    reason_id = params[:id].to_i
+    data = cached_query :reason_post_status_types_graph do
+      [
+        [
+          'Closed',
+          ((PostLog.where(is_closed: true)).left_joins(:post => :reasons).where(:reasons => {:id => reason_id})).count
+        ],
+        [
+          'Deleted',
+          ((PostLog.where(is_deleted: true)).left_joins(:post => :reasons).where(:reasons => {:id => reason_id})).count
+        ],
+        [
+          'Other',
+          ((PostLog.where('is_closed = false AND is_deleted = false')).left_joins(:post => :reasons).where(:reasons => {:id => reason_id})).count
+
+        ]
+      ]
+    end
+    render json: data
+  end
+
   def post_statuses
     likelihood = params[:likelihood].to_i
     data = cached_query :post_statuses_graph do 

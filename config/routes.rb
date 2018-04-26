@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get 'graphs', :to => 'graphs#index'
   get 'graphs/posts_by_hour', :to => 'graphs#posts_by_hour'
   get 'graphs/post_statuses', :to => 'graphs#post_statuses'
+  get 'graphs/reason_post_status_types', :to => 'graphs#reason_post_status_types'
 
   get 'review', :to => 'review#index'
   get 'review/close', :to => 'review#close_review'
