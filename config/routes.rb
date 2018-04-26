@@ -38,9 +38,11 @@ Rails.application.routes.draw do
   post 'users/:user_id/deauth', :to => 'se_auth#deauth'
 
   get 'authentication/initiate', :to => 'se_auth#initiate'
+  get 'authentication/upgrade', :to => 'se_auth#upgrade'
   post 'authentication/redirect', :to => 'se_auth#redirect'
   get 'authentication/target', :to => 'se_auth#target'
   get 'authentication/complete', :to => 'se_auth#already_done'
+  get 'authentication/login_target', :to => 'se_auth#login_target'
 
   get 'search', :to => 'search#results'
 

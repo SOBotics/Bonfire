@@ -40,3 +40,38 @@
 .navbar-inverse .logo {
   filter: invert(100%);
 }
+
+.login-box {
+  margin-bottom: 10px;
+
+  .btn-primary {
+    width: 100%
+  }
+}
+#devise-links a {
+  color: grey !important
+}
+
+.se-oauth-button {
+  width: 100%;
+  margin-bottom: 20px !important;
+}
+
+.se-icon {
+  height: 22px;
+}
+
+.se-auth-or-label {
+  text-align: center;
+}
+
+.login-box form {
+  border: 1px solid lightgrey;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.col-centered {
+  float: none !important;
+  margin: 0 auto;
+}

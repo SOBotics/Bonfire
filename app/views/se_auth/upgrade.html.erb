@@ -1,0 +1,14 @@
+<h3>Authenticate with Stack Exchange</h3>
+
+<p>From here, you can link your Bonfire account with Stack Exchange. This allows you to access features on Bonfire
+  that require Stack Exchange write access to perform.</p>
+
+<p>Currently, Bonfire does not have write permission with your linked StackExchange account, but only read access.</p>
+
+<p>Before you go ahead and authenticate, be aware that following this process stores a write-access key to your account
+  in the Bonfire database. This is normal practice for integrated apps, but you should be aware that this key gives
+  anyone who has access to it the potential to perform actions in your name.</p>
+
+<p>The people who can access this token are the server host (FelixSFD) and potentially any Bonfire developers (Ashish Ahuja).</p>
+
+<%= link_to 'Authenticate', url_for(:controller => :se_auth, :action => :redirect), :method => :post, :class => 'btn btn-danger' %>

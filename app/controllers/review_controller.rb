@@ -51,9 +51,17 @@ class ReviewController < ApplicationController
 
   private
     def verify_stack_auth
-      unless current_user.stack_user.present?
+      if current_user.stack_user.present?
+        puts current_user.stack_user.access_token
+        token_info = helpers.get_info_from_token(current_user.stack_user.access_token)
+        puts token_info
+        unless token_info.key?("scope")
+          flash[:danger] = "You need to grant Bonfire write access with your StackExchange account to use review."
+          redirect_to url_for(:controller => :se_auth, :action => :upgrade)
+        end 
+      else
         flash[:danger] = "You need to authenticate with StackExchange to use review."
-        redirect_to url_for(:controller => :se_auth, :action => :initiate)
+        redirect_to url_for(:controller => :se_auth, :action => :initiate)        
       end
     end
   
