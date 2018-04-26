@@ -6,7 +6,7 @@
 
 <%= form_tag url_for(:controller => :posts, :action => :index), :method => :get do %>
   <%= label_tag 'sort', 'Sort by' %>
-  <%= select_tag 'sort', options_for_select([['Likelihood', 'likelihood desc'], ['Creation date', 'created_at desc'],
+  <%= select_tag 'sort', options_for_select([['Likelihood', 'likelihood asc'], ['Creation date', 'created_at desc'],
                                               ['User reputation', 'user_reputation desc']], params[:sort] || 'created_at desc') %>
   <%= submit_tag "Go", :class => "bt btn-default" %>
 <% end %>

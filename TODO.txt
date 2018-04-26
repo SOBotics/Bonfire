@@ -4,7 +4,6 @@
 9. Checkout FA's backslash issue.
 11. Change version 'test'.
 12. Add statistics
-13. Allow login without email/password (check for write_access key in review).
 14. Allow review queues to be accessed without auth.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
 21. Grey out the selected tab.
@@ -14,7 +13,5 @@
 26. Improve search.
 27. Add SE Login to Sentinel as well.
 28. Bug: Review JS load takes a refresh.
-29. Protocol HTTPS in 'login_target'.
 30. Add post status graph per reason.
-31. Order in ascending, likelihood based order on main page.
 32.
