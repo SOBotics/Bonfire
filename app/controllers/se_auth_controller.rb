@@ -22,8 +22,6 @@ class SeAuthController < ApplicationController
     
     current_user.auth_state = auth_state
     if current_user.save
-      puts "____-----------------"
-      puts "https://stackexchange.com/oauth?client_id=#{client_id}&redirect_uri=#{redirect_uri}&scope=#{scope}&state=#{auth_state}"
       redirect_to "https://stackexchange.com/oauth?client_id=#{client_id}&redirect_uri=#{redirect_uri}&scope=#{scope}&state=#{auth_state}"
     else
       flash[:danger] = "Couldn't save a pre-auth token to your user account. Try again later, and contact a developer if the problem persists."
@@ -40,7 +38,6 @@ class SeAuthController < ApplicationController
       if stack_user.save
         if stack_user.update_details
           flash[:success] = "Authentication complete."
-          puts "auth complete hahaaha"
           redirect_to url_for(:controller => :se_auth, :action => :already_done)
         else
           flash[:danger] = "Can't update the user details for your user. Try again later, and contact a developer if the problem persists."

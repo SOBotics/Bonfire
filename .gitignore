@@ -59,3 +59,6 @@ config/config.yml
 
 # Ignore DS_Store on mac devices.
 *.DS_Store
+
+# Ignore precompiled rake assets.
+public/assets
