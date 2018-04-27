@@ -3,7 +3,7 @@ class SeAuthController < ApplicationController
 
   before_action :authenticate_user!, :except => [:login_target]
   before_action :verify_no_auth, :except => [:already_done, :deauth, :login_target]
-  before_action :verify_admin, :only => [:deauth]
+  before_action :verify_partial_admin, :only => [:deauth]
 
   def initiate
   end
@@ -117,6 +117,12 @@ class SeAuthController < ApplicationController
     def verify_no_auth
       if current_user.stack_user.present? && helpers.get_info_from_token(current_user.stack_user.access_token).key?("scope")
         redirect_to url_for(:controller => :se_auth, :action => :already_done)
+      end
+    end
+
+    def verify_partial_admin
+      unless params[:user_id] == current_user.id
+        verify_admin
       end
     end
 end

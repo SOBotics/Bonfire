@@ -51,6 +51,7 @@ $(document).ready(function() {
         .done(function(data) {
             var items = data['items'];
             var dialog = $(".modal-body").first();
+            dialog.draggable();
             var closeVoteItems = null             
 
             for (var i = 0; i < items.length; i ++) {

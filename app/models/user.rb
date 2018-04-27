@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_one :stack_user
-  has_many :reviews
+  has_many :reviews, :dependent => :destroy
 
   after_save :promote_if_first
 

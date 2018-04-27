@@ -14,4 +14,9 @@
 27. Add SE Login to Sentinel as well.
 28. Bug: Review JS load takes a refresh.
 32. Add robots.txt
-33.
+33. Add review filters (custom and default).
+34. Add test cases.
+35. Two factor auth.
+36. Add number of close votes in review queue.
+37. Allow deletion of one's own account in account settings.
+38.
