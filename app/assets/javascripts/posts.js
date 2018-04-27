@@ -3,13 +3,13 @@ var currentQuestionID;
 function createFlagOption(item, handler) {
     var container = $("<div></div>");
     container.addClass("clearfix flag-option");
-    container.append("<div class='pull-left col-sm-1 col-md-1'><input type='radio' name='flag-option' value='" + item['option_id'] + "' data-flagtype='" + item['title'] + "'/></div>");
+    container.append("<div class='pull-left col-sm-1 col-md-1'><input type='radio' id='" + item['option_id'] + "' name='flag-option' value='" + item['option_id'] + "' data-flagtype='" + item['title'] + "'/></div>");
     var details = $("<div class='pull-right col-sm-11 col-md-11'></div>");
     
     if('title' in item) {
         details.append("<p><strong>" + item['title'] + "</strong></p>");
     }
-    details.append("<p>" +  item['description'] + "</p>");
+    details.append("<p><label for=" + item['option_id'] +" style='font-weight: normal'>" +  item['description'] + "</label></p>");
     container.append(details);
 
     container.on('click', handler(item));

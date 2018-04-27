@@ -13,4 +13,5 @@
 26. Improve search.
 27. Add SE Login to Sentinel as well.
 28. Bug: Review JS load takes a refresh.
-32.
+32. Add robots.txt
+33.
