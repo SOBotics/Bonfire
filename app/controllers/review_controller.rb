@@ -1,6 +1,6 @@
 class ReviewController < ApplicationController
   before_action :authenticate_user!
-  #before_action :verify_stack_auth
+  before_action :verify_stack_auth
   helper_method :seed_count
   helper_method :close_count
 
