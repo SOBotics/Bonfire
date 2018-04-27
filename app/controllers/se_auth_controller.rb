@@ -80,6 +80,7 @@ class SeAuthController < ApplicationController
       flash[:success] = "Successfully logged in as #{user.username}!"
     else
       user = User.new(:email => "#{token_info['account_id']}@se-oauth.bonfire")
+      user.oauth_dependent = true
       stack_user = StackUser.new(:user => user, :access_token => token)
       if stack_user.save
         unless stack_user.update_details

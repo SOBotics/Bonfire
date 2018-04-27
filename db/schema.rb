@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410040544) do
+ActiveRecord::Schema.define(version: 20180427112703) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20180410040544) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "auth_state"
+    t.boolean "oauth_dependent", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

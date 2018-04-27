@@ -33,7 +33,11 @@
  
         <div class="text-center">
           <div class="actions">
-            <%= f.submit "Update", class: "btn btn-primary", :disabled => true %>
+            <% if current_user.oauth_dependent != true %>
+              <%= f.submit "Update", class: "btn btn-primary" %>
+            <% else %>
+              <%= f.submit "Update", class: "btn btn-primary", :disabled => true %>
+            <% end %>
           </div>
         </div>
       <% end %>
