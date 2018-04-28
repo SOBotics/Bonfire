@@ -11,5 +11,7 @@
 
 <p>The people who can access this token are the server host (FelixSFD) and potentially any Bonfire developers (Ashish Ahuja).</p>
 
+<p>Skipping authorization is not recommended. You won't be able to access a number of features, such as direct close voting from the review page. If you want to reverse a skip, go to "Account Settings" > "Authenticate with StackExchange"/"Upgrade your StackExchange authorization".</p>
+
 <%= link_to 'Authenticate', url_for(:controller => :se_auth, :action => :redirect), :method => :post, :class => 'btn btn-danger' %>
 <%= link_to 'Skip', url_for(:controller => :se_auth, :action => :skip), :method => :post, :class => 'btn btn-info' %>
