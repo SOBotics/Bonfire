@@ -8,7 +8,11 @@
   <div class="review-post" data-post-id="<%= post.id %>">
     <hr>
     <div class="actions">
-      <button class="btn btn-danger post-flag-link" data-questionid="<%= post.question_id %>">Vote to Close</button>
+      <% unless current_user.oauth_skipped %>
+        <button class="btn btn-danger post-flag-link" data-questionid="<%= post.question_id %>">Vote to Close</button>
+      <% else %>
+        <button class="btn btn-danger post-flag-link" disabled=true data-questionid="<%= post.question_id %>">Vote to Close</button>
+      <% end %>
       <button class="btn btn-info skip-link" data-questionid="<%= post.question_id %>" data-raction="skp">Skip</button>
       <div class="post-meta pull-right text-right">
         <p class="text-muted" style="display: inline"> Close vote count: <%= post.post_log.close_vote_count %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>

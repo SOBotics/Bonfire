@@ -18,4 +18,6 @@
 35. Two factor auth.
 37. Allow deletion of one's own account in account settings.
 38. Improve statistics.
-40.
+40. Make upgrade and initiate auth views into one.
+41. Add clear current posts option in review queue.
+42.

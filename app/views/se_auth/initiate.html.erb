@@ -9,4 +9,4 @@
 <p>The people who can access this token are the server host (FelixSFD) and potentially any Bonfire developers (Ashish Ahuja).</p>
 
 <%= link_to 'Authenticate', url_for(:controller => :se_auth, :action => :redirect), :method => :post, :class => 'btn btn-danger' %>
-
+<%= link_to 'Skip', url_for(:controller => :se_auth, :action => :skip), :method => :post, :class => 'btn btn-info' %>

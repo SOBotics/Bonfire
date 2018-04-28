@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  helper ApplicationHelper
+
   before_action :authenticate_user!, :except => [:index]
   before_action :verify_admin, :except => [:index]
   before_action :set_user, :except => [:index]

@@ -14,7 +14,18 @@ class SeAuthController < ApplicationController
   def already_done
   end
 
+  def skip
+    current_user.oauth_skipped = true
+    if current_user.save
+      flash[:success] = 'StackExchange authentication skipped! To reverse this, go to "Account Settings" > "Authenticate with StackExchange" to authorize Bonfire.'
+    else
+      flash[:danger] = "Could not skip StackExchange authorization! Try again later, and contact a developer if the problem persists."
+    end
+    redirect_to root_path
+  end
+
   def redirect
+    current_user.oauth_skipped = false
     client_id = AppConfig['se_client_id']
     redirect_uri = url_for(:controller => :se_auth, :action => :target)
     scope = 'no_expiry,write_access'

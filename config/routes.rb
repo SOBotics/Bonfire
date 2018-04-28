@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   get 'authentication/initiate', :to => 'se_auth#initiate'
   get 'authentication/upgrade', :to => 'se_auth#upgrade'
+  post 'authentication/skip', :to => 'se_auth#skip'
   post 'authentication/redirect', :to => 'se_auth#redirect'
   get 'authentication/target', :to => 'se_auth#target'
   get 'authentication/complete', :to => 'se_auth#already_done'

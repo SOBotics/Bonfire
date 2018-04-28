@@ -8,6 +8,20 @@
         <% end %>
       <% end %>
 
+      <% if current_user.stack_user.present? %>
+        <% unless get_info_from_token(current_user.stack_user.access_token).key?("scope") %>
+          <%= link_to auth_upgrade_link, class: "btn btn-default se-oauth-button" do %>
+            Upgrade your
+            <%= image_tag "se-icon.svg", class: "se-icon" %>StackExchange authorization.
+          <% end %>
+        <% end %>
+      <% else %>
+        <% link_to auth_initiate_link, :class => "btn btn-default se-oauth-button" do %>
+          Authenticate with
+          <%= image_tag "se-icon.svg", :class => "se-icon" %>StackExchange.
+        <% end %>
+      <% end %> 
+
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
 

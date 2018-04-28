@@ -51,6 +51,10 @@ class ReviewController < ApplicationController
 
   private
     def verify_stack_auth
+      if current_user.oauth_skipped
+        return
+      end      
+
       if current_user.stack_user.present?
         token_info = helpers.get_info_from_token(current_user.stack_user.access_token)
         unless token_info.key?("scope")
