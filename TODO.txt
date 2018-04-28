@@ -3,7 +3,6 @@
 8. Update whenever's cron job to include PATH instead of messy manual overwrite using `crontab -e`.
 9. Checkout FA's backslash issue.
 11. Change version 'test'.
-14. Allow review queues to be accessed without auth.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
 21. Grey out the selected tab.
 23. Add feature to disable registrations.
@@ -16,7 +15,6 @@
 33. Add review filters (custom and default).
 34. Add test cases.
 35. Two factor auth.
-37. Allow deletion of one's own account in account settings.
 38. Improve statistics.
 40. Make upgrade and initiate auth views into one.
 41. Add clear current posts option in review queue.
