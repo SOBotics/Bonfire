@@ -38,7 +38,7 @@
       </div>
     </div>
     <%= render 'posts/post', :post => post %>
-    <blockquote style="font-size: 14px"><%== post.body %></blockquote>
+    <blockquote style="font-size: 14px"><%= sanitize(post.body) %></blockquote>
   </div>
 <% end %>
 
