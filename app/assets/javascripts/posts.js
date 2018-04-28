@@ -91,7 +91,7 @@ $(document).ready(function() {
         })
         .done(function(data) {
             $(".modal").modal('hide');
-            bonfire.createNotification('success', "Post flagged successfully.", $(".post-flag-link"));
+            //bonfire.createNotification('success', "Post flagged successfully.", $(".post-flag-link"));
         })
         .error(function(xhr, status, error) {
             $(".modal").modal('hide');

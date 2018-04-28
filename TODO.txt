@@ -18,5 +18,4 @@
 35. Two factor auth.
 37. Allow deletion of one's own account in account settings.
 38. Improve statistics.
-39. Remove "Post Flagged Successfully" popup on close voting.
 40.
