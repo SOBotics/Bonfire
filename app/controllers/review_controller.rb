@@ -46,9 +46,9 @@ class ReviewController < ApplicationController
   end
 
   def clear_close
-    close_review
+    posts = get_close_posts
     failure = false
-    @posts.each do |post|
+    posts.each do |post|
       review = Review.new
       review.user = current_user
       review.post = Post.find_by_id post.id
@@ -69,9 +69,9 @@ class ReviewController < ApplicationController
   end
 
   def clear_seed
-    seed_review
+    posts = get_seed_posts
     failure = false
-    @posts.each do |post|
+    posts.each do |post|
       review = Review.new
       review.user = current_user
       review.post = Post.find_by_id post.id
