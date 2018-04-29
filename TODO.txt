@@ -17,5 +17,5 @@
 35. Two factor auth.
 38. Improve statistics.
 40. Make upgrade and initiate auth views into one.
-41. Add clear current posts option in review queue.
-42.
+42. Allow custom queue creation publicly available.
+43.

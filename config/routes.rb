@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   get 'review/seed', :to => 'review#seed_review'
   post 'review/create', :to => 'review#create'
   get 'review/history', :to => 'review#history'
+  get 'review/clear_close', :to => 'review#clear_close'
+  get 'review/clear_seed', :to => 'review#clear_seed'
 
   get 'api/posts/by_url', :to => 'api#posts_by_url'
   get 'api/reasons/:ids', :to => 'api#reasons_by_id'

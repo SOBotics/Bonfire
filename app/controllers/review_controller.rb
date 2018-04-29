@@ -45,6 +45,52 @@ class ReviewController < ApplicationController
     @posts = @posts.paginate(:page => params[:page], :per_page => 60)     
   end
 
+  def clear_close
+    close_review
+    failure = false
+    @posts.each do |post|
+      review = Review.new
+      review.user = current_user
+      review.post = Post.find_by_id post.id
+      review.review_action = ReviewAction.find_by_short_name "skp"
+
+      unless review.save
+        failure = true
+      end
+    end
+
+    unless failure
+      flash[:success] = "The close review queue has been successfully cleared."
+    else
+      flash[:danger] = "Clearing the close queue failed! Try again later, and contact a developer if the problem persists."
+    end
+
+    redirect_to url_for(:controller => :review, :action => :index)
+  end
+
+  def clear_seed
+    seed_review
+    failure = false
+    @posts.each do |post|
+      review = Review.new
+      review.user = current_user
+      review.post = Post.find_by_id post.id
+      review.review_action = ReviewAction.find_by_short_name "skp"
+
+      unless review.save
+        failure = true
+      end
+    end
+
+    unless failure
+      flash[:success] = "The seed review queue has been successfully cleared."
+    else
+      flash[:danger] = "Clearing the seed queue failed! Try again later, and contact a developer if the problem persists."
+    end
+
+    redirect_to url_for(:controller => :review, :action => :index)
+  end 
+
   def history
     @reviews = Review.all.order(:id => :desc).paginate(:page => params[:page], :per_page => 100)
   end 
