@@ -2,7 +2,6 @@
 7. Channels post?
 8. Update whenever's cron job to include PATH instead of messy manual overwrite using `crontab -e`.
 9. Checkout FA's backslash issue.
-11. Change version 'test'.
 16. Add stats to review queues; top reviewers, total reviewed, etc.
 21. Grey out the selected tab.
 23. Add feature to disable registrations.
@@ -18,4 +17,6 @@
 38. Improve statistics.
 40. Make upgrade and initiate auth views into one.
 42. Allow custom queue creation publicly available.
-43.
+43. Add % to pie charts (especially post status ones).
+44. Get current commit hash from git.
+45.
