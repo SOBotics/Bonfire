@@ -1,5 +1,5 @@
 <br/>
-<h3 style="display: inline">Close Review</h3> <%= link_to "(clear queue)", url_for(:controller => :review, :action => :clear_close) %>
+<h3 style="display: inline">Close Review</h3> <%= link_to "(clear queue)", url_for(:controller => :review, :action => :clear_close), :data => {:confirm => "Are you sure? This will skip all the posts in the review queue at this moment and is not reversible."} %>
 <br/>
 <br/>
 <p>
