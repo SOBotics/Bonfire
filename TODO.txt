@@ -19,4 +19,5 @@
 42. Allow custom queue creation publicly available.
 43. Add % to pie charts (especially post status ones).
 44. Get current commit hash from git.
-45.
+45. Fix auto-mail bug regarding TLS cert.
+46.
