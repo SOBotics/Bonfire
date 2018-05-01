@@ -19,8 +19,6 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'bonfire@bonfire.sobotics.org'
-  config.secret_key = '25a4a8973218974fde3c30c182b867bf9cc61dc2ded1d9eeff04a64ac7ca64228f53056c787c7f3f983567be2151a8e9f34590a6efaa7edd864e5713bd5b08a8'
-
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
