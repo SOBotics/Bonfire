@@ -64,20 +64,23 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   AppConfig = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
 
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => "sobotics.org",
-    :port => 80,
+    :port => 465,
     :user_name => AppConfig['ses_smtp_credentials']["username"],
     :password => AppConfig["ses_smtp_credentials"]['password'],
-    :authentication => :login
+    :authentication => :login,
+    :enable_starttls_auto => true,
+    :tls => true
   }
-  config.default_url_options = {:host => 'bonfire.sobotics.org', :port => 80}
-  config.action_mailer.default_url_optiosn = config.default_url_options
+  config.default_url_options = {:host => "bonfire.sobotics.org", :port => 6001}
+  config.action_mailer.default_url_options = config.default_url_options
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
