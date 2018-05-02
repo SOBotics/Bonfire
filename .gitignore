@@ -62,3 +62,6 @@ config/config.yml
 
 # Ignore precompiled rake assets.
 public/assets
+
+# Ignore commit hash file Bonfire uses.
+REVISION

@@ -62,4 +62,7 @@ Rails.application.routes.draw do
 
   get 'api/posts/by_url', :to => 'api#posts_by_url'
   get 'api/reasons/:ids', :to => 'api#reasons_by_id'
+
+  get "status/code.json", :to => "code_status#api"
+  get "status/code", :as => :code_status, :to => "code_status#index"
 end
