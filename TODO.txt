@@ -6,7 +6,6 @@
 21. Grey out the selected tab.
 23. Add feature to disable registrations.
 24. Review tab number should be synced with the review page close review number.
-25. Check for posts being edited.
 26. Improve search.
 27. Add SE Login to Sentinel as well.
 28. Bug: Review JS load takes a refresh.
@@ -20,4 +19,5 @@
 43. Add % to pie charts (especially post status ones).
 44. Get current commit hash from git.
 46. Add an expiring close votes queue.
-47.
+47. Allow cv-pls requests directly from the review queue.
+48. 
