@@ -14,6 +14,7 @@ class Post < ApplicationRecord
   validates :user_reputation, :presence => true
   validates :likelihood, :presence => true
   validate :question_id_exists
+  validate :latest_revision_exists
 
   def next
     Post.where("id > ?", self.id).first
@@ -23,6 +24,12 @@ class Post < ApplicationRecord
     def question_id_exists
       unless self.question_id.present?
         errors.add(:question_id, "must be present")
+      end
+    end
+
+    def latest_revision_exists
+      unless self.latest_revision.present?
+        self.latest_revision = self.body
       end
     end 
 end

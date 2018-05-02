@@ -7,7 +7,7 @@ class PostLog < ApplicationRecord
 
   def self.get_statuses
     api_key = AppConfig['se_api_key']
-    api_filter = '!)R7_YDvFk_s2DCKPUucfUyln'
+    api_filter = '!Frv9Q-3z_)LBt1(em-mvDuJYGT'
     eligible = Post.left_joins(:post_log)
 
     eligible = eligible.where(:post_log.nil?)
@@ -29,6 +29,7 @@ class PostLog < ApplicationRecord
           fetched_ids << item['question_id'].to_i
         end
 
+        # Check for post deletion
         deleted_ids = ids - fetched_ids
         logger.debug "[PostLog#get_statuses] #{deleted_ids.length} of 100-batch posts have been deleted."
         deleted_ids.each do |id|
@@ -43,6 +44,7 @@ class PostLog < ApplicationRecord
           end
         end
 
+        # Check for close votes
         total_closed = 0
         json['items'].each do |item|
           id = item['question_id']
@@ -68,9 +70,20 @@ class PostLog < ApplicationRecord
               PostLog.create(:post => post, :is_closed => false, :close_vote_count => item['close_vote_count'])
             end
           end
-        end
+        end 
 
-        logger.debug "[PostLog#get_statuses] #{total_closed} posts of 100-batch posts have been closed." 
+        logger.debug "[PostLog#get_statuses] #{total_closed} posts of 100-batch posts have been closed."
+
+        # Update latest_revision column for post edits
+        json['items'].each do |item|
+          post = Post.find_by_question_id item['question_id']
+          post.latest_revision = item['body']
+          unless post.save
+            logger.error "[PostLog#get_statuses] Cannot save updated post with post id #{post.id}!"
+          else
+            logger.debug "[PostLog#get_statuses] Updated post #{post.id}."
+          end
+        end 
         
         if json['backoff']
           logger.debug "[PostLog#get_statuses] Received API backoff; sleeping for #{json['backoff']} seconds."

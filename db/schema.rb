@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180429022232) do
+ActiveRecord::Schema.define(version: 20180502011917) do
 
   create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20180429022232) do
     t.datetime "updated_at", null: false
     t.integer "site_id"
     t.integer "question_id"
+    t.text "latest_revision"
     t.index ["site_id"], name: "index_posts_on_site_id"
   end
 
