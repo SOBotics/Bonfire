@@ -7,7 +7,6 @@
 24. Review tab number should be synced with the review page close review number.
 26. Improve search.
 27. Add SE Login to Sentinel as well.
-28. Bug: Review JS load takes a refresh.
 33. Add review filters (custom and default).
 34. Add test cases.
 35. Two factor auth.
@@ -17,4 +16,6 @@
 43. Add % to pie charts (especially post status ones).
 46. Add an expiring close votes queue.
 47. Allow cv-pls requests directly from the review queue.
-48. 
+48. Use JS to clear review queues.
+49. Silence AppConfig initialization warning.
+50. 

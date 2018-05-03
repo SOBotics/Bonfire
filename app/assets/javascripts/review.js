@@ -1,7 +1,7 @@
 var currentPostID;
 var $currentPost;
 
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
     $(".skip-link").on("click", function(ev) {
         var review_action_name = $(this).data("raction");
         var $post = $(this).parent().parent();

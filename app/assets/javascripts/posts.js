@@ -39,7 +39,7 @@ function initialiseFlagDialog(items, dialog, empty=true) {
     }
 }
 
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
     $(".post-flag-link").on("click", function(ev) {
         ev.preventDefault();
         var questionId = $(this).data("questionid");
